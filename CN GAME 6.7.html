@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>汉语大冒险 · ผจญภัยภาษาจีน ม.6</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Mitr:wght@300;400;500;600&family=Noto+Sans+SC:wght@400;700&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="bg-deco" aria-hidden="true"><span>福</span><span>学</span><span>龙</span><span>汉</span><span>语</span><span>加油</span></div>
+
+  <!-- หน้าเริ่ม -->
+  <section id="screen-start" class="screen active">
+    <div class="start-card">
+      <div class="logo-zh">汉语大冒险</div>
+      <div class="logo-th">ผจญภัยภาษาจีน</div>
+      <div class="logo-sub">ทบทวนบทที่ 19 · 20 · 21</div>
+      <div class="lantern-row"><span>🏮</span><span>🐉</span><span>🏮</span></div>
+      <input id="inp-name" maxlength="30" placeholder="พิมพ์ชื่อ-เลขที่ เช่น ปลา 6/1 เลขที่ 12" autocomplete="off">
+      <div id="name-status" class="name-status">💡 ใช้ชื่อเดิมทุกครั้งที่เข้าเล่น คะแนนและดาวจะสะสมต่อเนื่องอัตโนมัติ</div>
+      <button id="btn-start" class="btn btn-big">เริ่มผจญภัย ▶</button>
+      <div id="player-list" class="player-list"></div>
+      <div class="start-actions">
+        <button id="btn-board-start" class="btn btn-ghost">🏆 ตารางคะแนน</button>
+        <button id="btn-cloud-start" class="btn btn-ghost">☁️ เชื่อม Google Sheet (ครู)</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- แผนที่ด่าน -->
+  <section id="screen-map" class="screen">
+    <header class="topbar">
+      <div class="who"><span id="map-name"></span><small id="map-rank"></small></div>
+      <div class="stat-pill">⭐ <b id="map-stars">0</b></div>
+      <div class="stat-pill gold">🪙 <b id="map-score">0</b></div>
+      <button class="btn btn-sm" id="btn-board">🏆</button>
+      <button class="btn btn-sm" id="btn-settings">⚙️</button>
+      <button class="btn btn-sm btn-ghost" id="btn-logout">ออก</button>
+    </header>
+    <div id="world-list" class="world-list"></div>
+  </section>
+
+  <!-- เล่นเกม -->
+  <section id="screen-play" class="screen">
+    <header class="topbar play-bar">
+      <button class="btn btn-sm btn-ghost" id="btn-quit">✕</button>
+      <div class="play-title" id="play-title"></div>
+      <div class="progress"><div id="play-progress"></div></div>
+      <div class="stat-pill" id="play-extra" hidden></div>
+      <div class="stat-pill combo" id="play-combo" hidden></div>
+      <div class="stat-pill gold">🪙 <b id="play-score">0</b></div>
+    </header>
+    <main id="play-area" class="play-area"></main>
+  </section>
+
+  <!-- สรุปผล -->
+  <section id="screen-result" class="screen">
+    <div class="result-card">
+      <div id="res-title" class="res-title"></div>
+      <div id="res-stars" class="res-stars"></div>
+      <div class="res-grid">
+        <div><small>คะแนน</small><b id="res-score"></b></div>
+        <div><small>ถูก</small><b id="res-correct"></b></div>
+        <div><small>คอมโบสูงสุด</small><b id="res-combo"></b></div>
+      </div>
+      <div id="res-best" class="res-best"></div>
+      <div id="res-total" class="res-total"></div>
+      <div id="res-sync" class="res-sync"></div>
+      <div id="res-review" class="res-review"></div>
+      <div class="res-btns">
+        <button class="btn" id="btn-retry">↻ เล่นอีกครั้ง</button>
+        <button class="btn btn-ok" id="btn-next">ด่านถัดไป ▶</button>
+        <button class="btn btn-ghost" id="btn-tomap">กลับแผนที่</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ตารางคะแนน -->
+  <section id="screen-board" class="screen">
+    <div class="result-card wide">
+      <div class="res-title" id="board-title">🏆 ตารางคะแนนรวม</div>
+      <div id="board-sub" class="board-sub"></div>
+      <table class="board"><thead><tr><th>#</th><th>ชื่อ</th><th>⭐ ดาว</th><th>🪙 คะแนน</th><th>ด่านที่ผ่าน</th></tr></thead><tbody id="board-body"></tbody></table>
+      <div class="res-btns">
+        <button class="btn btn-gold" id="btn-sync-now">🔄 อัปเดตคะแนนล่าสุด</button>
+        <button class="btn" id="btn-copy">📋 คัดลอกผลคะแนนของฉัน</button>
+        <button class="btn" id="btn-csv">⬇️ ดาวน์โหลด CSV (ครู)</button>
+        <button class="btn btn-ghost" id="btn-cloud-board">☁️ ตั้งค่า Google Sheet</button>
+        <button class="btn btn-ghost" id="btn-board-back">กลับ</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ตั้งค่า -->
+  <div id="modal" class="modal" hidden>
+    <div class="modal-card" id="modal-card"></div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <canvas id="confetti"></canvas>
+
+  <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
